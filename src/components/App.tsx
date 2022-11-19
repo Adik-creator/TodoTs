@@ -9,7 +9,7 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) =>
 
     createStyles({
-        buttonAdd:{
+        buttonAdd: {
             width: '19%',
             height: '56px',
             marginLeft: '10px',
@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
 
     const addTodo = () => {
-        if (value) {
+        if (value.length) {
             setTodos([...todos, {
                 id: Date.now(),
                 title: value,
@@ -62,6 +62,7 @@ const App: React.FC = () => {
     const removeTodo = (id: number): void => {
         setTodos(todos.filter(todo => todo.id !== id))
     }
+
     const toggleTodo = (id: number): void => {
         setTodos(todos.map(todo => {
             if (todo.id !== id) {
@@ -69,11 +70,10 @@ const App: React.FC = () => {
             }
             return {
                 ...todo,
-                complete: !todo.complete
+                complete: !todo.complete,
             }
         }))
     }
-
     return (
         <>
             <Header/>
@@ -83,7 +83,8 @@ const App: React.FC = () => {
                         className={classes.input}
                         label={"tasks"}
                         variant={"outlined"}
-                        type="text" value={value}
+                        type="text"
+                        value={value}
                         onChange={e => setValue(e.target.value)}
                         onKeyDown={handleKeyDown}
                         ref={inputRef}

@@ -1,9 +1,7 @@
 import React from "react";
-
 import {ITodo} from "../types/data";
 import {TodoItem} from "./TodoItem";
-import Card from "@material-ui/core/Card";
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+// import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
 interface ITodoListProps {
     items: ITodo[];
@@ -11,34 +9,36 @@ interface ITodoListProps {
     toggleTodo: (id: number) => void;
 }
 
-const TodoList: React.FC<ITodoListProps> = (props) => {
+const TodoList: React.FC<ITodoListProps> = ({items, removeTodo, toggleTodo}) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
-    const {items, removeTodo, toggleTodo} = props
 
     return (
         <div>
             {
-                props.items.map(todo => <TodoItem
+                items.map(todo => <TodoItem
                     key={todo.id}
                     removeTodo={removeTodo}
                     toggleTodo={toggleTodo}
-                    {...todo}
+                    // {...todo}
+                    id={todo.id}
+                    title={todo.title}
+                    complete={todo.complete}
                 />)
             }
         </div>
     )
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-
-    createStyles({
-        cardTodoList: {
-            width: '100%'
-        },
-    }),
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//
+//     createStyles({
+//         cardTodoList: {
+//             width: '100%'
+//         },
+//     }),
+// );
 
 
 export {TodoList}

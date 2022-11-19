@@ -4,7 +4,6 @@ import {Button, CardContent, Typography} from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {createStyles, Theme, makeStyles} from '@material-ui/core/styles';
-import { flexbox } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 
 interface ITodoItem extends ITodo {
@@ -25,10 +24,13 @@ const TodoItem: React.FC<ITodoItem> = (props) => {
                                className={classes.checkbox}
                                checked={complete}
                                onChange={() => toggleTodo(id)}
+
                         />
                     </Box>
                     <Box>
-                        <Typography variant={"h6"}>
+                        <Typography
+                            variant={"h6"}
+                            style={complete ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>
                             {title}
                         </Typography>
                     </Box>
@@ -37,7 +39,7 @@ const TodoItem: React.FC<ITodoItem> = (props) => {
                            className={classes.button}
                            onClick={() => removeTodo(id)}
                            variant="contained"
-                           color={"secondary"}
+                           color={"secondary"}  
                        >
                            <DeleteIcon/>
                        </Button>
